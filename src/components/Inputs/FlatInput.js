@@ -6,7 +6,6 @@ import { _fontSize } from "../../constants/sizeCalculator";
 
 export default function FlatInput({
   handleTextInput,
-  inputField,
   value,
   error,
   label = "Placeholder",
@@ -30,7 +29,7 @@ export default function FlatInput({
         allowFontScaling={false}
         label={label}
         value={value}
-        onChangeText={(text) => handleTextInput(text, inputField)}
+        onChangeText={handleTextInput}
         style={{ backgroundColor: backgroundColor, fontSize: fontSize, fontFamily: fontFamily }}
         dense={true}
         error={error}
