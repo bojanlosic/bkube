@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "rn-boilerplate",
-    "slug": "rn-boilerplate",
+    "name": "bkube",
+    "slug": "bkube",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "rn-boilerplate",
+    "scheme": "bkube",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -41,7 +41,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.bojanlosic.rnboilerplate",
+      "package": "rs.losic.bojan.bkube",
       "googleServicesFile": "./google-services.json"
     },
     "web": {
@@ -50,7 +50,8 @@
     "plugins": [
       "expo-notifications",
       "expo-splash-screen",
-      "expo-updates"
+      "expo-updates",
+      "expo-location"
     ]
   }
 }

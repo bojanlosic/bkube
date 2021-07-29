@@ -1,26 +1,60 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { storageSetItem } from "../../../core/storage";
 import { loginUserAction } from "../../../redux/actions/user";
 import LoginView from "./LoginView";
 import * as WebBrowser from "expo-web-browser";
 import { useAuthRequest } from "expo-auth-session/providers/google";
 import { setLoadingApiAction } from "../../../redux/actions/app";
+import { DEBUG_MODE } from "@env";
 
 WebBrowser.maybeCompleteAuthSession();
 
 const Login = ({ navigation }) => {
   const dispatch = useDispatch();
+  const app = useSelector((state) => state.app);
   const [userInfo, setUserInfo] = React.useState({
     email: "",
     password: "",
   });
+  const initialErrors = {
+    email: "",
+    password: "",
+    login: "",
+  };
+  const [errors, setErrors] = React.useState(initialErrors);
+  const initialHidePassword = {
+    password: true,
+  };
+  const [hidePassword, setHidePassword] = React.useState(initialHidePassword);
 
   function handleTextInput(value, name) {
     setUserInfo({ ...userInfo, [name]: value });
   }
 
+  const setErrorMessage = (field, message) => {
+    setErrors({ ...errors, [field]: message });
+  };
+
+  const handleHidePassword = (field) => {
+    setHidePassword({ ...hidePassword, [field]: !hidePassword[field] });
+  };
+
   const login = async () => {
+    if (!DEBUG_MODE) {
+      if (!userInfo.email) {
+        setErrorMessage("email", "Email is required!");
+        return;
+      } else {
+        setErrorMessage("email", "");
+      }
+      if (!userInfo.password) {
+        setErrorMessage("password", "Password is required!");
+        return;
+      } else {
+        setErrorMessage("password", "");
+      }
+    }
     const credentils = {
       email: userInfo.email,
       password: userInfo.password,
@@ -52,7 +86,6 @@ const Login = ({ navigation }) => {
       .then((response) => response.json())
       .then(async (json) => {
         console.log(json);
-        await storageSetItem("token", token);
         dispatch(loginUserAction({ data: { token, user: json } }));
         dispatch(setLoadingApiAction(false));
       })
@@ -62,7 +95,6 @@ const Login = ({ navigation }) => {
   };
 
   React.useEffect(() => {
-    console.log(response?.type);
     if (response?.type === "success") {
       const { authentication } = response;
       // Dispatch action to get token from backend
@@ -74,10 +106,14 @@ const Login = ({ navigation }) => {
     <LoginView
       userInfo={userInfo}
       handleTextInput={handleTextInput}
-      navigation={navigation}
       login={login}
+      navigation={navigation}
       request={request}
       promptAsync={() => promptAsync()}
+      errors={errors}
+      theme={app.appTheme}
+      hidePassword={hidePassword}
+      handleHidePassword={handleHidePassword}
     />
   );
 };

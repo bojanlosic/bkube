@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, Platform, StyleSheet, Keyboard, Dimensions, Touch
 import { initialWindowMetrics, SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import SplashScreen from "./SplashScreen";
-import { setStatusBarBackgroundColor, setStatusBarStyle, StatusBar } from "expo-status-bar";
+import { setStatusBarBackgroundColor, setStatusBarStyle, StatusBar, StatusBarStyle } from "expo-status-bar";
 import getThemeColor from "../constants/colors/getThemeColor";
 
 const useIsFloatingKeyboard = () => {
@@ -31,29 +31,19 @@ const ScreenWrapper = ({ children }) => {
   if (Platform.OS === "android") {
     setStatusBarBackgroundColor(backgroundColor, true);
   }
-  setStatusBarStyle(app.appTheme === "default" ? "dark" : "light");
+  setStatusBarStyle(app.appTheme === "default" ? "light" : "dark");
 
   return (
-    <SafeAreaView style={styles.container} initialMetrics={initialWindowMetrics}>
-      {Platform.OS === "ios" ? (
-        <KeyboardAvoidingView style={{ flex: 1, width: "100%" }} behavior="padding" enabled={!isFloatingKeyboard}>
-          <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={{ flex: 1 }}>
-              {children}
-              {app.isLoadingAPI && <SplashScreen />}
-            </View>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
-      ) : (
-        <KeyboardAvoidingView keyboardVerticalOffset={50} style={{ flex: 1, width: "100%" }} behavior="height">
-          <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <View style={{ flex: 1 }}>
-              {children}
-              {app.isLoadingAPI && <SplashScreen />}
-            </View>
-          </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
-      )}
+    <SafeAreaView style={[styles.container, { backgroundColor: getThemeColor("background", app.appTheme) }]} initialMetrics={initialWindowMetrics}>
+      <KeyboardAvoidingView style={{ flex: 1, width: "100%" }} behavior={Platform.OS === "ios" ? "padding" : "height"} enabled={!isFloatingKeyboard}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={{ flex: 1 }}>
+            {children}
+            {app.isLoadingAPI && <SplashScreen />}
+            {/* {Platform.OS === "ios" && <StatusBar style="light" />} */}
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -63,7 +53,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    backgroundColor: "white",
   },
 });
 export default ScreenWrapper;

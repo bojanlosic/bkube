@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT } from "../../../redux/types/actionTypes";
 import MoreView from "./MoreView";
 import { logoutUser } from "../../../redux/actions/user";
-import { setLanguageAction } from "../../../redux/actions/app";
+import { setAppTheme, setLanguageAction } from "../../../redux/actions/app";
 
 const More = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,11 @@ const More = () => {
     dispatch(setLanguageAction(language));
   };
 
-  return <MoreView logout={logout} setLanguage={(lang) => setLanguage(lang)} app={app} />;
+  const changeTheme = () => {
+    dispatch(setAppTheme(app.appTheme === "default" ? "dark" : "default"));
+  };
+
+  return <MoreView logout={logout} changeTheme={changeTheme} setLanguage={(lang) => setLanguage(lang)} app={app} />;
 };
 
 export default More;

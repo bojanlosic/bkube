@@ -3,6 +3,18 @@ import { AppState } from "react-native";
 import * as Updates from "expo-updates";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
+import {
+  useFonts,
+  Heebo_100Thin,
+  Heebo_200ExtraLight,
+  Heebo_300Light,
+  Heebo_400Regular,
+  Heebo_500Medium,
+  Heebo_600SemiBold,
+  Heebo_700Bold,
+  Heebo_800ExtraBold,
+  Heebo_900Black,
+} from "@expo-google-fonts/heebo";
 // import {
 //   useFonts,
 //   sarabun-regular,
@@ -20,11 +32,17 @@ export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
   const [fontLoaded, setFontLoaded] = React.useState(false);
   const [currentAppState, setCurrentAppState] = React.useState("active");
-  // let [fontsLoaded] = useFonts({
-  //   sarabun-regular,
-  //   sarabun-semi-bold,
-  //   Sarabun_700Bold,
-  // });
+  let [fontsLoaded] = useFonts({
+    Heebo_100Thin,
+    Heebo_200ExtraLight,
+    Heebo_300Light,
+    Heebo_400Regular,
+    Heebo_500Medium,
+    Heebo_600SemiBold,
+    Heebo_700Bold,
+    Heebo_800ExtraBold,
+    Heebo_900Black,
+  });
 
   const handleAppStateChange = (nextAppState) => {
     setCurrentAppState(nextAppState);
@@ -54,26 +72,28 @@ export default function useCachedResources() {
   // };
 
   React.useEffect(() => {
-    //checking for over the air updates
-    AppState.addEventListener("change", handleAppStateChange);
-    async function loadResourcesAndDataAsync() {
-      try {
-        // await loadFont();
-        SplashScreen.preventAutoHideAsync();
-        setLoadingComplete(true);
-      } catch (error) {
-        console.warn(error);
-      } finally {
-        // setLoadingComplete(true);
-        SplashScreen.hideAsync();
+    if (fontsLoaded) {
+      AppState.addEventListener("change", handleAppStateChange);
+      //checking for over the air updates
+      async function loadResourcesAndDataAsync() {
+        try {
+          // await loadFont();
+          SplashScreen.preventAutoHideAsync();
+          setLoadingComplete(true);
+        } catch (error) {
+          console.warn(error);
+        } finally {
+          // setLoadingComplete(true);
+          SplashScreen.hideAsync();
+        }
       }
+      loadResourcesAndDataAsync();
+      checkForUpdates();
+      return () => {
+        AppState.removeEventListener("change", handleAppStateChange);
+      };
     }
-    loadResourcesAndDataAsync();
-    checkForUpdates();
-    return () => {
-      AppState.removeEventListener("change", handleAppStateChange);
-    };
-  }, []);
+  }, [fontsLoaded]);
 
   return isLoadingComplete;
 }

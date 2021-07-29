@@ -6,7 +6,6 @@ import { View, StyleSheet, Text } from "react-native";
 import * as types from "../redux/types/actionTypes";
 import Constants from "expo-constants";
 import ScreenWrapper from "../components/ScreenWrapper";
-import { defaultColors as Colors } from "../constants/colors/Colors";
 import UserCamera from "../components/UserCamera";
 import Login from "../screens/Auth/Login/LoginScreen";
 import Register from "../screens/Auth/Register/RegisterScreen";

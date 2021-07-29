@@ -5,6 +5,8 @@ import Home from "../screens/App/Home/HomeScreen";
 import More from "../screens/App/More/MoreScreen";
 import { MaterialIcons } from "@expo/vector-icons";
 import { defaultColors as Colors } from "../constants/colors/Colors";
+import { useSelector } from "react-redux";
+import getThemeColor from "../constants/colors/getThemeColor";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -75,15 +77,18 @@ const MoreStackNavigator = () => {
 };
 
 const Tabs = () => {
+  const app = useSelector((state) => state.app);
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: Colors.primary,
+        activeTintColor: getThemeColor("primary", app.appTheme),
+        activeBackgroundColor: getThemeColor("background", app.appTheme),
+        inactiveBackgroundColor: getThemeColor("background", app.appTheme),
       }}
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          color = focused ? Colors.primary : Colors.b085;
+          color = focused ? getThemeColor("primary", app.appTheme) : getThemeColor("text", app.appTheme);
           if (route.name === "Home") {
             return <MaterialIcons name="home" size={size} color={color} />;
           } else if (route.name === "Search") {
