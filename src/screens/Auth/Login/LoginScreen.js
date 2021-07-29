@@ -60,7 +60,7 @@ const Login = ({ navigation }) => {
       password: userInfo.password,
     };
     try {
-      await dispatch(loginUserAction(credentils));
+      dispatch(loginUserAction(credentils));
     } catch (error) {
       console.log("register page", error);
       alert(error);

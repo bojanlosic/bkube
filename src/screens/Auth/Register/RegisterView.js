@@ -58,15 +58,15 @@ export default ({ userInfo, handleTextInput, registerUser, navigation, request, 
         />
         <FlatButton theme={theme} onPress={registerUser} text="Sign up" />
         <View style={{ flexDirection: "row", justifyContent: "center", marginTop: _generalSize(12) }}>
-          <AppText color="text" text="Already have an account?" />
+          <AppText theme={theme} color="text" text="Already have an account?" />
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <AppText color="text" text="Log in" color="primary" fontFamily={fonts.Heebo_500Medium} marginLeft={4} />
+            <AppText theme={theme} color="text" text="Log in" color="primary" fontFamily={fonts.Heebo_500Medium} marginLeft={4} />
           </TouchableOpacity>
         </View>
         <View style={{ marginVertical: _generalSize(20), alignItems: "center" }}>
-          <AppText text="Or" color="text" />
+          <AppText theme={theme} text="Or" color="text" />
         </View>
-        <ContinueWithSocial />
+        <ContinueWithSocial theme={theme} />
       </View>
     </ScrollView>
   );

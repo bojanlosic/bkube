@@ -1,12 +1,25 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import Colors from "../../../constants/colors/Colors";
+import getThemeColor from "../../../constants/colors/getThemeColor";
+import { _generalSize } from "../../../constants/sizeCalculator";
 
-const Styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-});
+const getStyles = (theme) => {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: getThemeColor('background', theme),
+    },
 
-export default Styles;
+    headerView: {
+
+      display: 'flex',
+      flexDirection: 'row',
+      paddingLeft:_generalSize(20),
+    },
+
+    
+  });
+};
+
+export default getStyles;

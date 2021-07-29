@@ -1,10 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ForgotPasswordView from "./ForgotPasswordView";
 
 const ForgotPassword = ({ navigation }) => {
   const dispatch = useDispatch();
-  const [email, setEmail] = React.useState();
+  const app = useSelector((state) => state.app);
+  const [userInfo, setUserInfo] = React.useState({
+    email: "",
+  });
+
+  function handleTextInput(value, name) {
+    setUserInfo({ ...userInfo, [name]: value });
+  }
 
   const sendForgotPasswordToEmail = () => {
     try {
@@ -18,7 +25,15 @@ const ForgotPassword = ({ navigation }) => {
     }
   };
 
-  return <ForgotPasswordView email={email} setEmail={setEmail} sendForgotPasswordToEmail={sendForgotPasswordToEmail} navigation={navigation} />;
+  return (
+    <ForgotPasswordView
+      handleTextInput={handleTextInput}
+      userInfo={userInfo}
+      sendForgotPasswordToEmail={sendForgotPasswordToEmail}
+      navigation={navigation}
+      theme={app.appTheme}
+    />
+  );
 };
 
 export default ForgotPassword;
