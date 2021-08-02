@@ -19,7 +19,7 @@ export default ({ theme }) => {
     >
       <Logo style={{ color: getThemeColor("svgImage", theme) }} width={_imageSize(131)} />
       <AppText theme={theme} style={{ marginTop: _generalSize(28) }} text="Welcome to Bkube" fontSize={20} />
-      <AppText theme={theme} text="Keep your bike safe and secure" color="dirtyWhiteText" fontSize={16} />
+      <AppText theme={theme} text="Keep your bike safe and secure" color="textInputPlaceholder" fontSize={16} />
     </View>
   );
 };

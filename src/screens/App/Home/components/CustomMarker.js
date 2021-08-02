@@ -8,7 +8,7 @@ export default function CustomMarker({ theme = "default", text = 0 }) {
   return (
     <View style={styles.biggerCircle}>
       <View style={styles.smallerCircle}>
-        <AppText text={text} theme={theme} color={text ? "text" : "dirtyWhiteText"} />
+        <AppText text={text} theme={theme} color={text ? "text" : "darkMedium"} />
       </View>
     </View>
   );

@@ -22,7 +22,7 @@ export default ({ theme, haveHash, continueToLogin }) => {
             style={[styles.textStyle, { marginTop: _generalSize(4) }]}
             text="Please continue to log in page to access you account"
             fontSize={16}
-            color="dirtyWhiteText"
+            color="darkMedium"
           />
         </View>
       ) : (
@@ -33,7 +33,7 @@ export default ({ theme, haveHash, continueToLogin }) => {
             style={[styles.textStyle, { marginTop: _generalSize(4) }]}
             text="Check your email to continue"
             fontSize={16}
-            color="dirtyWhiteText"
+            color="darkMedium"
           />
         </View>
       )}
