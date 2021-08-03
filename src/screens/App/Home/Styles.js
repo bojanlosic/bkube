@@ -36,8 +36,8 @@ const getStyles = (theme) => {
       borderRadius: _generalSize(16),
       borderColor: getThemeColor("textInputPlaceholder", theme),
     },
-    sheltersContainer: { flexDirection: "row", flexWrap: "wrap", marginTop: _generalSize(12) },
-    sheltersGrid: { flex: 1 / 3, marginBottom: _generalSize(12), paddingHorizontal: _generalSize(6), height: _generalSize(170) },
+    sheltersContainer: { flex: 1, flexDirection: "row", marginTop: _generalSize(12) },
+    sheltersGrid: { flex: 1 / 3, marginBottom: _generalSize(12), paddingHorizontal: _generalSize(6), maxHeight: _generalSize(160) },
     shelterContainer: {
       flex: 1,
       backgroundColor: getThemeColor("darkMedium2", theme),
@@ -46,6 +46,16 @@ const getStyles = (theme) => {
       padding: _generalSize(16),
       borderRadius: _generalSize(4),
     },
+    balanceContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingHorizontal: _generalSize(6),
+      paddingBottom: _generalSize(16),
+    },
+    currentBalanceContainer: { flexDirection: "row", alignItems: "center" },
+    balancePointsContainer: { flexDirection: "row", alignItems: "center", marginLeft: _generalSize(8) },
+    addMoreTokensContainer: { flexDirection: "row", alignItems: "center" },
   });
 };
 

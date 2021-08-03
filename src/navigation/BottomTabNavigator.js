@@ -96,7 +96,11 @@ const Tabs = () => {
       initialRouteName="Explore"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          color = focused ? getThemeColor("primaryPressed", app.appTheme) : getThemeColor("white", app.appTheme);
+          if (app.appTheme === "default") {
+            color = focused ? getThemeColor("primaryPressed", app.appTheme) : getThemeColor("white", app.appTheme);
+          } else {
+            color = focused ? getThemeColor("primary", app.appTheme) : getThemeColor("svgImage", app.appTheme);
+          }
           if (route.name === "Explore") {
             return <MapMarker width={_generalSize(size)} color={color} />;
           } else if (route.name === "Scan QR") {
@@ -107,7 +111,11 @@ const Tabs = () => {
           return <MaterialIcons name="dashboard" size={size} color={color} />;
         },
         tabBarLabel: ({ focused, color }) => {
-          color = focused ? "primaryPressed" : "navigationTextWhite";
+          if (app.appTheme === "default") {
+            color = focused ? "primaryPressed" : "navigationTextWhite";
+          } else {
+            color = focused ? "primary" : "navigationTextWhite";
+          }
           if (route.name === "Explore") {
             return <AppText text="Explore" theme={app.appTheme} color={color} fontSize={12} />;
           } else if (route.name === "Scan QR") {

@@ -12,12 +12,14 @@ export default function ContinueWithSocial({ theme, request, promptAsync }) {
       <OutlineButton
         theme={theme}
         onPress={promptAsync}
+        marginLeft={8}
         text="Continue with Apple"
         icon={<AntDesign name="apple1" size={_generalSize(20)} color={getThemeColor("text", theme)} />}
       />
       <OutlineButton
         theme={theme}
         style={{ marginTop: _generalSize(16) }}
+        marginLeft={8}
         text="Continue with Google"
         disabled={!request}
         onPress={promptAsync}

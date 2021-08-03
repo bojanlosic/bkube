@@ -37,6 +37,7 @@ export default ({ theme }) => {
           bottomSheetRef.current.expand();
         }}
       />
+      
     </View>
   );
 };

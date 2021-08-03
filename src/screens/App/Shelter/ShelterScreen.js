@@ -5,12 +5,13 @@ import ShelterView from "./ShelterView";
 const Scan = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const id = route.params.id;
+  const site = route.params.site;
+  const shelter = route.params.shelter;
 
   const navigateBack = () => {
     navigation.goBack();
   };
-  return <ShelterView theme={app.appTheme} id={id} navigateBack={navigateBack} />;
+  return <ShelterView theme={app.appTheme} shelter={shelter} site={site} navigateBack={navigateBack} />;
 };
 
 export default Scan;
