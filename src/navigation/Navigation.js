@@ -18,6 +18,9 @@ import ForgotPassword from "../screens/Auth/ForgotPassword/ForgotPasswordScreen"
 import ResetPassword from "../screens/Auth/ResetPassword/ResetPasswordScreen";
 import * as Linking from "expo-linking";
 import VerifyAccount from "../screens/Auth/VerifyAccount/VerifyAccountScreen";
+import ConfirmationLink from "../screens/Auth/ConfirmationLink/ConfirmationLinkScreen";
+import EnterNewPassword from "../screens/Auth/EnterNewPassword/EnterNewPasswordScreen";
+import SuccesFull from '../screens/Auth/SuccesfullChange/SuccsesfullChangeScreen';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -160,6 +163,9 @@ export default function Navigation() {
                   <LoginStack.Screen name="ResetPassword" component={ResetPassword} />
                   <LoginStack.Screen name="Register" component={Register} />
                   <LoginStack.Screen name="VerifyAccount" component={VerifyAccount} />
+                  <LoginStack.Screen name="ConfirmationLink" component={ConfirmationLink} />
+                  <LoginStack.Screen name="EnterNewPassword" component={EnterNewPassword} />
+                  <LoginStack.Screen name="SuccesfullyChange" component={SuccesFull} />
                 </>
               ) : (
                 <LoginStack.Screen name="Home" component={Tabs} />

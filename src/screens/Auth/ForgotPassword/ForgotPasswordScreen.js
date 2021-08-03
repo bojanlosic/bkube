@@ -32,6 +32,7 @@ const ForgotPassword = ({ navigation }) => {
       sendForgotPasswordToEmail={sendForgotPasswordToEmail}
       navigation={navigation}
       theme={app.appTheme}
+      
     />
   );
 };

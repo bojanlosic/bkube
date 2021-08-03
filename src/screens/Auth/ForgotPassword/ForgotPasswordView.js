@@ -8,7 +8,8 @@ import OutlineButton from "../../../components/buttons/OutlineButton";
 import FlatButton from "../../../components/buttons/FlatButton";
 import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
+import { defaultColors } from "../../../constants/colors/Colors";
 export default ({
   userInfo,
   sendForgotPasswordToEmail,
@@ -19,11 +20,56 @@ export default ({
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
     <View style={styles.container}>
-
+      <View style={{flex:1}}>
       <View style={styles.headerView}>
-      <AntDesign name="arrowleft" size={_generalSize(24)} color={getThemeColor('text', theme)} />
-      <AppText theme={theme} text="Forgot Password" fontSize={20} fontFamily={fonts.Heebo_700Bold} />
+        <AntDesign
+          name="arrowleft"
+          size={_generalSize(24)}
+          color={getThemeColor("text", theme)}
+          style={styles.headerArrow}
+          onPress={() => navigation.navigate("Login")}
+        />
 
+        <AppText
+          theme={theme}
+          text="Forgot Password"
+          fontSize={16}
+          fontFamily={fonts.Heebo_400Regular}
+          style={styles.headerText}
+        />
+        <View />
+      </View>
+      <View style={styles.instructionsView}>
+        <AppText
+          theme={theme}
+          text="Please fill in fields to continue"
+          fontSize={20}
+          fontFamily={fonts.Heebo_400Regular}
+        />
+        <AppText
+          theme={theme}
+          text="Mail with furhter instructions will be sent to you"
+          fontSize={16}
+          fontFamily={fonts.Heebo_400Regular}
+          color={"dirtyWhiteText"}
+        />
+      </View>
+      <View style={styles.inputView}>
+        <FlatInput
+          theme={theme}
+          handleTextInput={(text) => handleTextInput(text, "email")}
+          inputField={"email"}
+          value={userInfo.email}
+          label={"Email*"}
+          
+        />
+      </View>
+      </View>
+      <View style={{flex:1}}>
+
+      <View style={styles.buttonView}>
+        <FlatButton theme={theme} text="Submit" onPress={() => navigation.navigate("ConfirmationLink")} />
+      </View>
       </View>
       {/* <FlatInput
         theme={theme}
