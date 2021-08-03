@@ -1,3 +1,4 @@
+import { WHEN_PASSCODE_SET_THIS_DEVICE_ONLY } from "expo-secure-store";
 import React from "react";
 import { StyleSheet } from "react-native";
 import Colors from "../../../constants/colors/Colors";
@@ -15,9 +16,37 @@ const getStyles = (theme) => {
 
       display: 'flex',
       flexDirection: 'row',
-      paddingLeft:_generalSize(20),
+      justifyContent:'space-between'
     },
 
+    headerArrow: {
+
+    paddingLeft:_generalSize(10),
+    },
+
+    headerText: {
+
+      marginRight:_generalSize(10)
+    },
+
+    instructionsView: {
+
+      paddingLeft:_generalSize(24),
+      paddingTop:_generalSize(36),
+    },
+
+    inputView: {
+      
+      paddingLeft:_generalSize(16),
+      paddingRight:_generalSize(16),
+      marginTop:_generalSize(50)
+    },
+
+    buttonView: {
+      
+      paddingLeft:_generalSize(16),
+      paddingRight:_generalSize(16),
+    }
     
   });
 };
