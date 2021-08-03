@@ -49,7 +49,7 @@ export default ({ navigation, theme }) => {
             text="Check your email to continue"
             fontSize={16}
             fontFamily={fonts.Heebo_400Regular}
-            color={"dirtyWhiteText"}
+            color={"textInputPlaceholder"}
             style={styles.aligner}
           />
         </View>

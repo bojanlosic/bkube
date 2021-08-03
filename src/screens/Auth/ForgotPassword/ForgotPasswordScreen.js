@@ -25,14 +25,18 @@ const ForgotPassword = ({ navigation }) => {
     }
   };
 
+  const navigateBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <ForgotPasswordView
       handleTextInput={handleTextInput}
       userInfo={userInfo}
       sendForgotPasswordToEmail={sendForgotPasswordToEmail}
+      navigateBack={navigateBack}
       navigation={navigation}
       theme={app.appTheme}
-      
     />
   );
 };

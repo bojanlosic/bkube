@@ -54,7 +54,7 @@ export default ({
             text="Enter your new password to continue"
             fontSize={16}
             fontFamily={fonts.Heebo_400Regular}
-            color={"dirtyWhiteText"}
+            color={"textInputPlaceholder"}
           />
         </View>
 

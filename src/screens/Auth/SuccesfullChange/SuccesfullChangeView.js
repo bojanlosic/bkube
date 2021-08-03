@@ -31,7 +31,7 @@ export default ({ navigation, theme }) => {
             text="Continue to login screen"
             fontSize={16}
             fontFamily={fonts.Heebo_400Regular}
-            color={"dirtyWhiteText"}
+            color={"textInputPlaceholder"}
             style={styles.aligner}
           />
         </View>
