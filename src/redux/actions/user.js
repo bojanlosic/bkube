@@ -32,7 +32,7 @@ export const registerUserAction = (data) => {
 
 export const loginUserAction = (data) => {
   return async (dispatch) => {
-  console.log(DEBUG_MODE);
+  // console.log(DEBUG_MODE);
   if (DEBUG_MODE) {
       await storageSetItem("token", "X");
       dispatch({ type: types.LOGIN, payload: { token: "X", user: {} } });

@@ -40,3 +40,15 @@ export const setAppTheme = (theme) => {
     await dispatch({ type: types.CHANGE_THEME, payload: theme });
   };
 };
+
+export const bookingController = (payload) => {
+  return async (dispatch) => {
+    await dispatch({ type: types.BOOK_SHELTER, payload: payload });
+  };
+};
+
+export const cameraController = (payload) => {
+  return async (dispatch) => {
+    dispatch({ type: types.SHOW_CAMERA, payload: payload });
+  };
+};

@@ -7,6 +7,14 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { defaultColors as Colors } from "../constants/colors/Colors";
 import { useSelector } from "react-redux";
 import getThemeColor from "../constants/colors/getThemeColor";
+import Scan from "../screens/App/Scan/ScanScreen";
+import MapMarker from "../../assets/svg/map-marker.svg";
+import QRCodeScan from "../../assets/svg/qrcode-scan.svg";
+import Bars from "../../assets/svg/bars.svg";
+import { _generalSize } from "../constants/sizeCalculator";
+import AppText from "../components/texts/AppText";
+import Booking from "../screens/App/Booking/BookingScreen";
+import Shelter from "../screens/App/Shelter/ShelterScreen";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,13 +61,23 @@ const Tab = createBottomTabNavigator();
 // };
 
 const HomeStackNavigator = () => {
+  const app = useSelector((state) => state.app);
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      {app.booked === false ? (
+        <>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Booking" component={Booking} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="Shelter" component={Shelter} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };
@@ -81,30 +99,53 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: getThemeColor("primary", app.appTheme),
+        activeTintColor: getThemeColor("primaryPressed", app.appTheme),
         activeBackgroundColor: getThemeColor("background", app.appTheme),
         inactiveBackgroundColor: getThemeColor("background", app.appTheme),
       }}
-      initialRouteName="Home"
+      initialRouteName="Explore"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          color = focused ? getThemeColor("primary", app.appTheme) : getThemeColor("text", app.appTheme);
-          if (route.name === "Home") {
-            return <MaterialIcons name="home" size={size} color={color} />;
-          } else if (route.name === "Search") {
-            return <MaterialIcons name="search" size={size} color={color} />;
+          if (app.appTheme === "default") {
+            color = focused ? getThemeColor("primaryPressed", app.appTheme) : getThemeColor("white", app.appTheme);
+          } else {
+            color = focused ? getThemeColor("primary", app.appTheme) : getThemeColor("svgImage", app.appTheme);
+          }
+          if (route.name === "Explore") {
+            return <MapMarker width={_generalSize(size)} color={color} />;
+          } else if (route.name === "Scan QR") {
+            return <QRCodeScan size={_generalSize(size)} color={color} />;
           } else if (route.name === "More") {
-            return <MaterialIcons name="menu" size={size} color={color} />;
+            return <Bars size={_generalSize(size)} color={color} />;
           }
           return <MaterialIcons name="dashboard" size={size} color={color} />;
         },
+        tabBarLabel: ({ focused, color }) => {
+          if (app.appTheme === "default") {
+            color = focused ? "primaryPressed" : "navigationTextWhite";
+          } else {
+            color = focused ? "primary" : "navigationTextWhite";
+          }
+          if (route.name === "Explore") {
+            return <AppText text="Explore" theme={app.appTheme} color={color} fontSize={12} />;
+          } else if (route.name === "Scan QR") {
+            return <AppText text="Scan QR" theme={app.appTheme} color={color} fontSize={12} />;
+          } else if (route.name === "More") {
+            return <AppText text="More" theme={app.appTheme} color={color} fontSize={12} />;
+          }
+        },
       })}
     >
-      <Tab.Screen name="Home" component={HomeStackNavigator} />
-      {/* <Tab.Screen name="Search" component={SearchStackNavigator} /> */}
+      <Tab.Screen name="Explore" component={HomeStackNavigator} />
+      <Tab.Screen name="Scan QR" component={Scan} />
       <Tab.Screen name="More" component={MoreStackNavigator} />
     </Tab.Navigator>
   );
 };
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
 
 export { Tabs };

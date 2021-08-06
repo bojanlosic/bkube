@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import useCachedResources from "./src/hooks/useCachedResources";
 import Navigation from "./src/navigation/Navigation";
 import { store } from "./src/redux/store";
+import { PortalProvider } from "@gorhom/portal";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -13,7 +14,9 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-        <Navigation />
+        <PortalProvider>
+          <Navigation />
+        </PortalProvider>
       </Provider>
     );
   }

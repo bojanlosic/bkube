@@ -12,6 +12,7 @@ export default function AppText({
   fontFamily = fonts.Heebo_400Regular,
   fontSize = 14,
   marginLeft = 0,
+  children,
 }) {
   return (
     <Text
@@ -27,6 +28,7 @@ export default function AppText({
       ]}
     >
       {text}
+      {children}
     </Text>
   );
 }

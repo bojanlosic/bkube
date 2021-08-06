@@ -10,3 +10,4 @@ export const SHOW_CAMERA = "SHOW_CAMERA";
 export const LANGUAGE = "LANGUAGE";
 export const NOTIFICATION = "NOTIFICATION";
 export const CHANGE_THEME = "CHANGE_THEME";
+export const BOOK_SHELTER = "BOOK_SHELTER";

@@ -3,7 +3,7 @@ import { Button, Text, View } from "react-native";
 import { mainStyle as style } from "@styles";
 import styles from "./Styles";
 import i18n from "../../../languages";
-import AddAPhoto from "../../../../assets/images/svg/add_a_photo.svg";
+import AddAPhoto from "../../../../assets/svg/add_a_photo.svg";
 import getStyles from "../Home/Styles";
 
 export default ({ logout, changeTheme, setLanguage, app }) => {

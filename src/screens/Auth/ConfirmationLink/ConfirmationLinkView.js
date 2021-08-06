@@ -10,7 +10,7 @@ import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
 import { AntDesign } from "@expo/vector-icons";
 import { defaultColors } from "../../../constants/colors/Colors";
-import Envelope from "../../../../assets/images/svg/envelope.svg";
+import Envelope from "../../../../assets/svg/envelope.svg";
 export default ({ navigation, theme }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
@@ -49,7 +49,7 @@ export default ({ navigation, theme }) => {
             text="Check your email to continue"
             fontSize={16}
             fontFamily={fonts.Heebo_400Regular}
-            color={"dirtyWhiteText"}
+            color={"textInputPlaceholder"}
             style={styles.aligner}
           />
         </View>

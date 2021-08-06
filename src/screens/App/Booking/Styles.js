@@ -1,7 +1,5 @@
-import { WHEN_PASSCODE_SET_THIS_DEVICE_ONLY } from "expo-secure-store";
 import React from "react";
 import { StyleSheet } from "react-native";
-import Colors from "../../../constants/colors/Colors";
 import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
 
@@ -12,12 +10,20 @@ const getStyles = (theme) => {
       backgroundColor: getThemeColor("background", theme),
       padding: _generalSize(16),
     },
-
-    headerView: {
-      display: "flex",
-      flexDirection: "row",
-      justifyContent: "space-between",
+    shelterContainer: {
+      flex: 1,
       alignItems: "center",
+      marginTop: _generalSize(16),
+    },
+    shelterDirectionButton: { flex: 1, marginHorizontal: _generalSize(4) },
+    contentContainer: {
+      height: "100%",
+      paddingHorizontal: _generalSize(16),
+      backgroundColor: getThemeColor("darkMedium", theme),
+    },
+    shadowContainer: {
+      ...StyleSheet.absoluteFillObject,
+      backgroundColor: '#000',
     },
   });
 };

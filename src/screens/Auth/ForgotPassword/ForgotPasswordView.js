@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
 import getStyles from "./Styles";
 import FlatInput from "../../../components/Inputs/FlatInput";
 import AppText from "../../../components/texts/AppText";
@@ -10,17 +10,11 @@ import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
 import { AntDesign } from "@expo/vector-icons";
 import { defaultColors } from "../../../constants/colors/Colors";
-export default ({
-  userInfo,
-  sendForgotPasswordToEmail,
-  navigation,
-  theme,
-  handleTextInput,
-}) => {
+import ArrowLeft from "../../../../assets/svg/arrow-left.svg";
+export default ({ userInfo, sendForgotPasswordToEmail, navigateBack, navigation, theme, handleTextInput }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
     <View style={styles.container}>
-      <View style={{flex:1}}>
       <View style={styles.headerView}>
         <AntDesign
           name="arrowleft"
@@ -64,12 +58,28 @@ export default ({
           
         />
       </View>
+      <View style={{ flex: 1, }}>
+        <View style={{ flex: 2, justifyContent: "space-evenly" }}>
+          <View style={styles.instructionsView}>
+            <AppText theme={theme} text="Please fill in fields to continue" fontSize={20} />
+            <AppText theme={theme} text="Mail with furhter instructions will be sent to you" fontSize={16} color={"textInputPlaceholder"} />
+          </View>
+          <View style={styles.inputView}>
+            <FlatInput
+              theme={theme}
+              handleTextInput={(text) => handleTextInput(text, "email")}
+              inputField={"email"}
+              value={userInfo.email}
+              label={"Email*"}
+            />
+          </View>
+        </View>
+        <View style={{ flex: 1 }} />
       </View>
-      <View style={{flex:1}}>
-
-      <View style={styles.buttonView}>
-        <FlatButton theme={theme} text="Submit" onPress={() => navigation.navigate("ConfirmationLink")} />
-      </View>
+      <View style={{ flex: 1 }}>
+        <View style={styles.buttonView}>
+          <FlatButton theme={theme} text="Submit" onPress={() => navigation.navigate("ConfirmationLink")} />
+        </View>
       </View>
       {/* <FlatInput
         theme={theme}
