@@ -8,7 +8,7 @@ export default function FlatButton({
   style,
   theme = "default",
   backgroundColor = "primary",
-  paddingVertical = 16,
+  paddingVertical = 20,
   borderRadius = 4,
   icon = null,
   fontSize = 16,

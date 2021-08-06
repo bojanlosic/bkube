@@ -8,11 +8,12 @@ import { defaultColors as Colors } from "../constants/colors/Colors";
 import { useSelector } from "react-redux";
 import getThemeColor from "../constants/colors/getThemeColor";
 import Scan from "../screens/App/Scan/ScanScreen";
-import MapMarker from "../../assets/images/svg/map-marker.svg";
-import QRCodeScan from "../../assets/images/svg/qrcode-scan.svg";
-import Bars from "../../assets/images/svg/bars.svg";
+import MapMarker from "../../assets/svg/map-marker.svg";
+import QRCodeScan from "../../assets/svg/qrcode-scan.svg";
+import Bars from "../../assets/svg/bars.svg";
 import { _generalSize } from "../constants/sizeCalculator";
 import AppText from "../components/texts/AppText";
+import Booking from "../screens/App/Booking/BookingScreen";
 import Shelter from "../screens/App/Shelter/ShelterScreen";
 
 const Stack = createStackNavigator();
@@ -60,14 +61,23 @@ const Tab = createBottomTabNavigator();
 // };
 
 const HomeStackNavigator = () => {
+  const app = useSelector((state) => state.app);
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Shelter" component={Shelter} />
+      {app.booked === false ? (
+        <>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Booking" component={Booking} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="Shelter" component={Shelter} />
+        </>
+      )}
     </Stack.Navigator>
   );
 };

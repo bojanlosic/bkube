@@ -7,6 +7,7 @@ const initialState = {
   notification: null,
   camera: false,
   appTheme: "default",
+  booked: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +41,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         appTheme: action.payload,
+      };
+    case types.BOOK_SHELTER:
+      return {
+        ...state,
+        booked: action.payload,
       };
 
     default:

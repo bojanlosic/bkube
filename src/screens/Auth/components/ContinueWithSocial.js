@@ -3,7 +3,7 @@ import { View } from "react-native";
 import OutlineButton from "../../../components/buttons/OutlineButton";
 import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
-import GoogleLogo from "../../../../assets/images/svg/google-logo.svg";
+import GoogleLogo from "../../../../assets/svg/google-logo.svg";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function ContinueWithSocial({ theme, request, promptAsync }) {

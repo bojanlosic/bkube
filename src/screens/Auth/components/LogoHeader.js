@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import Logo from "../../../../assets/images/svg/logo.svg";
+import Logo from "../../../../assets/svg/logo.svg";
 import AppText from "../../../components/texts/AppText";
 import getThemeColor from "../../../constants/colors/getThemeColor";
 import fonts from "../../../constants/fonts";

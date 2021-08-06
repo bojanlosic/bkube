@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Dimensions, Image } from "react-native";
+import { TouchableOpacity, View, Dimensions, Platform } from "react-native";
 import getStyles from "./Styles";
 import AppText from "../../../components/texts/AppText";
 import ArrowLeft from "../../../../assets/svg/arrow-left.svg";
@@ -14,11 +14,9 @@ import FlatButton from "../../../components/buttons/FlatButton";
 import { Portal, PortalHost } from "@gorhom/portal";
 import BottomSheet from "reanimated-bottom-sheet";
 import Animated from "react-native-reanimated";
-import { renderShadow } from "../components/BottomSheetBackdrop";
-import ParkingCircle from "../../../../assets/svg/parking-circle-20.svg";
-import Lock from "../../../../assets/svg/lock.svg";
+import { renderShadow } from "./BottomSheetBackdrop";
 
-export default ({ theme, site, shelter, navigateBack, openCamera, dispPayShelter }) => {
+export default ({ theme, site, shelter, navigateBack, dispBookShelter, openCamera }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   const bottomSheetRef = React.useRef(null);
   let fall = new Animated.Value(1);
@@ -28,7 +26,7 @@ export default ({ theme, site, shelter, navigateBack, openCamera, dispPayShelter
 
   const bottomSheetContainer = () => (
     <View style={styles.contentContainer}>
-      <View style={{ alignItems: "center", padding: _generalSize(20) }}>
+      <View style={{ alignItems: "center", paddingVertical: _generalSize(16) }}>
         <AppText
           style={{ textAlign: "center" }}
           theme={theme}
@@ -41,23 +39,23 @@ export default ({ theme, site, shelter, navigateBack, openCamera, dispPayShelter
         <FlatButton
           onPress={() => {
             bottomSheetRef.current.snapTo(1);
-            dispPayShelter();
+            dispBookShelter();
           }}
           theme={theme}
-          text="Confirm payment"
+          text="Confirm booking"
         />
-        <OutlineButton onPress={() => bottomSheetRef.current.snapTo(1)} theme={theme} style={{ marginTop: _generalSize(12) }} text="Cancel payment" />
+        <OutlineButton onPress={() => bottomSheetRef.current.snapTo(1)} theme={theme} style={{ marginTop: _generalSize(12) }} text="Cancel booking" />
       </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      {/* <View>
+      <View>
         <TouchableOpacity onPress={navigateBack}>
           <ArrowLeft width={_generalSize(28)} style={{ color: getThemeColor("text", theme) }} />
         </TouchableOpacity>
-      </View> */}
+      </View>
       <View style={styles.shelterContainer}>
         <AppText theme={theme} text={`Shelter ${shelter?.number}`} fontSize={24} fontFamily={fonts.Heebo_700Bold} color="primary" />
         <AppText theme={theme} text={site?.name} color="navigationTextWhite" style={{ marginTop: _generalSize(8) }} />
@@ -69,7 +67,6 @@ export default ({ theme, site, shelter, navigateBack, openCamera, dispPayShelter
             style={styles.shelterDirectionButton}
             paddingVertical={8}
             fontSize={14}
-            fontFamily={fonts.Heebo_400Regular}
             marginLeft={8}
             text="Directions"
           />
@@ -79,33 +76,9 @@ export default ({ theme, site, shelter, navigateBack, openCamera, dispPayShelter
             style={styles.shelterDirectionButton}
             paddingVertical={8}
             fontSize={14}
-            fontFamily={fonts.Heebo_400Regular}
             marginLeft={8}
             text="Report"
           />
-        </View>
-        <View style={{ marginTop: _generalSize(16), flexDirection: "row" }}>
-          <View style={[styles.shelterInUseContainer, { marginEnd: _generalSize(6) }]}>
-            <AppText theme={theme} text="In use" />
-            <AppText theme={theme} text="00:02:16" fontSize={24} fontFamily={fonts.Heebo_500Medium} />
-          </View>
-          <View style={[styles.shelterInUseContainer, { marginStart: _generalSize(6) }]}>
-            <AppText theme={theme} text="Amount to pay" />
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <AppText theme={theme} text="0.1" fontSize={24} fontFamily={fonts.Heebo_500Medium} />
-              <View>
-                <ParkingCircle height={_generalSize(4)} style={{ color: getThemeColor("darkMedium2", theme) }} />
-                <ParkingCircle width={_generalSize(20)} style={{ color: getThemeColor("text", theme) }} />
-              </View>
-            </View>
-          </View>
-        </View>
-        <View>
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", position: "relative" }}>
-            <Image style={{ position: "absolute", top: 0, left: 0 }} source={require("../../../../assets/images/BGError.png")} />
-            <Lock width={_generalSize(80)} style={{ color: getThemeColor("text", theme) }} />
-            <AppText theme={theme} text="Shelter locked" fontSize={16} />
-          </View>
         </View>
       </View>
       <View>
@@ -118,7 +91,7 @@ export default ({ theme, site, shelter, navigateBack, openCamera, dispPayShelter
             }}
             theme={theme}
             style={{ marginTop: _generalSize(12) }}
-            text="Checkout and pay"
+            text="Book shelter"
           />
         </View>
       </View>

@@ -10,7 +10,7 @@ import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
 import { AntDesign } from "@expo/vector-icons";
 import { defaultColors } from "../../../constants/colors/Colors";
-import ArrowLeft from "../../../../assets/images/svg/arrow-left.svg";
+import ArrowLeft from "../../../../assets/svg/arrow-left.svg";
 export default ({ userInfo, sendForgotPasswordToEmail, navigateBack, navigation, theme, handleTextInput }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (

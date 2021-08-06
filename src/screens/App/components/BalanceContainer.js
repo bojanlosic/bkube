@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import AppText from "../../../components/texts/AppText";
 import getThemeColor from "../../../constants/colors/getThemeColor";
-import ParkingCircle from "../../../../assets/images/svg/parking-circle.svg";
+import ParkingCircle from "../../../../assets/svg/parking-circle.svg";
 import { Feather } from "@expo/vector-icons";
 import { _generalSize } from "../../../constants/sizeCalculator";
 import fonts from "../../../constants/fonts";
@@ -38,8 +38,8 @@ const getStyles = (theme) => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      paddingHorizontal: _generalSize(6),
       paddingBottom: _generalSize(16),
+      paddingTop: _generalSize(8),
     },
     currentBalanceContainer: { flexDirection: "row", alignItems: "center" },
     balancePointsContainer: { flexDirection: "row", alignItems: "center", marginLeft: _generalSize(8) },

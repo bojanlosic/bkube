@@ -8,7 +8,7 @@ export default function OutlineButton({
   style,
   theme = "default",
   backgroundColor = "transparent",
-  paddingVertical = 16,
+  paddingVertical = 20,
   borderRadius = 4,
   borderColor = "text",
   borderWidth = 1,

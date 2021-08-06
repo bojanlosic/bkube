@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { mainStyle as style } from "@styles";
 import getStyles from "./Styles";
-import GoogleLogo from "../../../../assets/images/svg/google-logo.svg";
+import GoogleLogo from "../../../../assets/svg/google-logo.svg";
 import { HelperText, TextInput } from "react-native-paper";
 import getThemeColor from "../../../constants/colors/getThemeColor";
 import {

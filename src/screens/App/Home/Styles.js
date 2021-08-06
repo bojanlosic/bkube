@@ -16,6 +16,7 @@ const getStyles = (theme) => {
     contentContainer: {
       height: "100%",
       paddingHorizontal: _generalSize(12),
+      paddingBottom: _generalSize(16),
       backgroundColor: getThemeColor("darkMedium", theme),
     },
     header: {

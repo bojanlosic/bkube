@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity as TouchableOpacityIOS, Platform } from "react-native";
+import { View, TouchableOpacity as TouchableOpacityIOS, Platform, ActivityIndicator } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import getStyles from "./Styles";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
@@ -13,25 +13,40 @@ import FlatInput from "../../../components/Inputs/FlatInput";
 import AppText from "../../../components/texts/AppText";
 import { _generalSize } from "../../../constants/sizeCalculator";
 import fonts from "../../../constants/fonts";
-import Stopwatch from "../../../../assets/images/svg/stopwatch.svg";
-import LocationPin from "../../../../assets/images/svg/location-pin-alt.svg";
+import Stopwatch from "../../../../assets/svg/stopwatch.svg";
+import LocationPin from "../../../../assets/svg/location-pin-alt.svg";
 import getThemeColor from "../../../constants/colors/getThemeColor";
 import BalanceContainer from "../components/BalanceContainer";
 import { capitalizeLetter } from "../../../constants/capitalizeLetter";
 
 const numColumns = 3;
 
-export default ({ theme, site, locations, userLocation, navigateToShelter, formatData }) => {
+export default ({ theme, site, locations, userLocation, navigateToShelter, formatData, defaultLocation }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
+  const [realUserLocation, setRealUserLocation] = React.useState(false);
   const bottomSheetRef = React.useRef(null);
+  const mapViewRef = React.useRef(null);
+
+  React.useEffect(() => {
+    console.log(userLocation);
+    if (userLocation !== defaultLocation && userLocation["falseLocation"] === undefined) {
+      if (mapViewRef.current) {
+        setRealUserLocation(true);
+        let r = { ...userLocation.coords };
+        r.latitudeDelta = 0.07;
+        r.longitudeDelta = 0.07;
+        mapViewRef.current.animateToRegion(r, 2000);
+      }
+    }
+  }, [userLocation]);
 
   // variables
   const snapPoints = React.useMemo(() => ["90%", "20%", 0], []);
 
-  // callbacks
-  const handleSheetChanges = React.useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+  const shelterOnPress = (site, item) => {
+    bottomSheetRef.current.snapTo(2);
+    navigateToShelter(site, item);
+  };
 
   const shelterInfo = (theme, item, shelterStatus, shelterBackgroundColor, textColorShelter, textColor) => {
     return (
@@ -59,23 +74,11 @@ export default ({ theme, site, locations, userLocation, navigateToShelter, forma
     return (
       <View key={item?.id} style={styles.sheltersGrid}>
         {Platform.OS === "ios" ? (
-          <TouchableOpacityIOS
-            onPress={() => {
-              sheetRef.current.snapTo(2);
-              navigateToShelter(site, item);
-            }}
-            style={{ height: "100%" }}
-          >
+          <TouchableOpacityIOS disabled={item?.status !== "free"} onPress={() => shelterOnPress(site, item)} style={{ height: "100%" }}>
             {shelterInfo(theme, item, shelterStatus, shelterBackgroundColor, textColorShelter, textColor)}
           </TouchableOpacityIOS>
         ) : (
-          <TouchableOpacity
-            onPress={() => {
-              sheetRef.current.snapTo(2);
-              navigateToShelter(site, item);
-            }}
-            style={{ height: "100%" }}
-          >
+          <TouchableOpacity disabled={item?.status !== "free"} onPress={() => shelterOnPress(site, item)} style={{ height: "100%" }}>
             {shelterInfo(theme, item, shelterStatus, shelterBackgroundColor, textColorShelter, textColor)}
           </TouchableOpacity>
         )}
@@ -109,35 +112,39 @@ export default ({ theme, site, locations, userLocation, navigateToShelter, forma
       <BalanceContainer theme={theme} />
     </View>
   );
-  const sheetRef = React.useRef(null);
 
   return (
     <View style={styles.container}>
-      {userLocation && (
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          region={{
-            latitude: userLocation?.coords?.latitude,
-            longitude: userLocation?.coords?.longitude,
-            latitudeDelta: 0.07,
-            longitudeDelta: 0.07,
-          }}
-          customMapStyle={theme == "default" ? mapStyle : lightMapStyle}
-          showsUserLocation={true}
-          followsUserLocation={true}
-        >
-          {locations?.map((element) => {
-            return (
-              <Marker key={element.id} onPress={() => sheetRef.current.snapTo(0)} coordinate={element.coordinate}>
-                <CustomMarker theme={theme} text={element.free} />
-              </Marker>
-            );
-          })}
-        </MapView>
-      )}
+      <MapView
+        ref={mapViewRef}
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+        region={{
+          latitude: userLocation?.coords?.latitude,
+          longitude: userLocation?.coords?.longitude,
+          latitudeDelta: 0.07,
+          longitudeDelta: 0.07,
+        }}
+        customMapStyle={theme == "default" ? mapStyle : lightMapStyle}
+        showsUserLocation={realUserLocation}
+        followsUserLocation={true}
+      >
+        {locations?.map((element) => {
+          return (
+            <Marker key={element.id} onPress={() => bottomSheetRef.current.snapTo(0)} coordinate={element.coordinate}>
+              <CustomMarker theme={theme} text={element.free} />
+            </Marker>
+          );
+        })}
+      </MapView>
       <Portal>
-        <BottomSheet initialSnap={2} ref={sheetRef} snapPoints={snapPoints} borderRadius={_generalSize(16)} renderContent={bottomSheetContainer} />
+        <BottomSheet
+          initialSnap={2}
+          ref={bottomSheetRef}
+          snapPoints={snapPoints}
+          borderRadius={_generalSize(16)}
+          renderContent={bottomSheetContainer}
+        />
       </Portal>
       <PortalHost name="custom_host" />
     </View>

@@ -6,6 +6,7 @@ import * as Location from "expo-location";
 import { View } from "react-native";
 import AppText from "../../../components/texts/AppText";
 import FlatButton from "../../../components/buttons/FlatButton";
+import getThemeColor from "../../../constants/colors/getThemeColor";
 
 const formatData = (data, numColumns) => {
   const numberOfFullRows = Math.floor(data.length / numColumns);
@@ -84,10 +85,15 @@ const site = {
   ],
 };
 
+const defaultLocation = {
+  coords: { latitude: 45.8053848, longitude: 20.4052433 },
+  falseLocation: true,
+};
+
 const Home = ({ navigation }) => {
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
-  const [userLocation, setUserLocation] = React.useState(null);
+  const [userLocation, setUserLocation] = React.useState(defaultLocation);
   const [hasPermission, setHasPermission] = React.useState(null);
 
   const requestLocation = async () => {
@@ -112,15 +118,15 @@ const Home = ({ navigation }) => {
   }
   if (hasPermission === false) {
     return (
-      <View>
-        <AppText>No access to location</AppText>
-        <FlatButton text="Grant access" onPress={() => requestLocation()} />
+      <View style={{ backgroundColor: getThemeColor("background", app.appTheme), flex: 1 }}>
+        <AppText theme={app.appTheme}>No access to location</AppText>
+        <FlatButton text="Grant access" onPress={async () => await requestLocation()} />
       </View>
     );
   }
 
   const navigateToShelter = (site, shelter) => {
-    navigation.navigate("Shelter", { site: site, shelter: shelter });
+    navigation.navigate("Booking", { site: site, shelter: shelter });
   };
 
   return (
@@ -131,6 +137,7 @@ const Home = ({ navigation }) => {
       userLocation={userLocation}
       navigateToShelter={navigateToShelter}
       formatData={formatData}
+      defaultLocation={defaultLocation}
     />
   );
 };

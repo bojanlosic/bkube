@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import BookingView from "./BookingView";
 import { bookingController, cameraController } from "../../../redux/actions/app";
-import ShelterView from "./ShelterView";
 
-const Shelter = ({ navigation, route }) => {
+const Scan = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
   const site = route?.params?.site;
@@ -13,24 +13,23 @@ const Shelter = ({ navigation, route }) => {
     navigation.goBack();
   };
 
+  const dispBookShelter = () => {
+    dispatch(bookingController(true));
+  };
+
   const openCamera = () => {
     dispatch(cameraController(true));
   };
-
-  const dispPayShelter = () => {
-    dispatch(bookingController(false));
-  };
-
   return (
-    <ShelterView
+    <BookingView
       theme={app.appTheme}
       shelter={shelter}
       site={site}
       navigateBack={navigateBack}
+      dispBookShelter={dispBookShelter}
       openCamera={openCamera}
-      dispPayShelter={dispPayShelter}
     />
   );
 };
 
-export default Shelter;
+export default Scan;

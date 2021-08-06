@@ -10,7 +10,7 @@ import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
 import { AntDesign } from "@expo/vector-icons";
 import { defaultColors } from "../../../constants/colors/Colors";
-import Check from "../../../../assets/images/svg/check.svg";
+import Check from "../../../../assets/svg/check.svg";
 export default ({ navigation, theme }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
