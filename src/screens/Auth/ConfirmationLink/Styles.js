@@ -9,6 +9,7 @@ const getStyles = (theme) => {
     container: {
       flex: 1,
       backgroundColor: getThemeColor('background', theme),
+      paddingHorizontal:_generalSize(24)
     },
 
     headerView: {
@@ -17,16 +18,20 @@ const getStyles = (theme) => {
         flexDirection: 'row',
         justifyContent:'space-between'
       },
-  
-      headerArrow: {
-  
-      paddingLeft:_generalSize(10),
+
+      headerView: {
+        display: 'flex',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems: "center",
       },
-  
-      headerText: {
-  
-        marginRight:_generalSize(10)
-      },
+
+
+      envelopeImage: {
+        alignSelf:'center',
+        marginVertical:_generalSize(24),
+        
+    },
 
       envelopeView: {
           flex:1,
@@ -36,7 +41,8 @@ const getStyles = (theme) => {
 
       aligner: {
 
-        alignSelf:'center'
+        alignSelf:'center',
+        marginBottom: _generalSize(8)
       }
     
   });

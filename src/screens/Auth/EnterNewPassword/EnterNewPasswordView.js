@@ -41,7 +41,7 @@ export default ({
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1, justifyContent:'space-around' }}>
+      <View style={styles.inputAndInstructionsFlex}>
         <View style={styles.instructionsView}>
           <AppText
             theme={theme}
@@ -95,8 +95,17 @@ export default ({
         <View />
       </View>
       <View style={{ flex: 1 }}>
-      <FlatButton theme={theme} onPress={() => navigation.navigate('SuccesfullyChange')} text="Submit" style={styles.buttonSpace} />
-      <OutlineButton theme={theme} onPress={() => navigation.navigate('Login')} text="Cancel" />
+        <FlatButton
+          theme={theme}
+          onPress={() => navigation.navigate("SuccesfullyChange")}
+          text="Submit"
+          style={styles.buttonSpace}
+        />
+        <OutlineButton
+          theme={theme}
+          onPress={() => navigation.navigate("Login")}
+          text="Cancel"
+        />
       </View>
     </View>
   );

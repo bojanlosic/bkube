@@ -18,6 +18,17 @@ const getStyles = (theme) => {
     buttonSpace: {
       marginBottom: _generalSize(10),
     },
+
+    instructionsView : {
+
+      paddingHorizontal:_generalSize(8)
+    },
+
+    inputAndInstructionsFlex: {
+
+      flex: 1,
+      justifyContent:'space-around',
+    }
   });
 };
 

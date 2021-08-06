@@ -35,7 +35,7 @@ export default ({ navigation, theme }) => {
           <View />
         </View>
         <View style={styles.envelopeView}>
-          <Envelope style={styles.aligner}/>
+          <Envelope style={styles.envelopeImage}/>
 
           <AppText
             theme={theme}

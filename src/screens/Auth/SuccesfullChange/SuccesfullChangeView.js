@@ -16,8 +16,8 @@ export default ({ navigation, theme }) => {
   return (
     <View style={styles.container}>
       <View style={{ flex: 1, }}>
-        <View style={styles.envelopeView}>
-          <Check style={styles.aligner}/>
+        <View style={styles.checkView}>
+          <Check style={styles.checkImage}/>
 
           <AppText
             theme={theme}

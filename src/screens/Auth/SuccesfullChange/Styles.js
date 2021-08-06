@@ -12,18 +12,8 @@ const getStyles = (theme) => {
       paddingHorizontal: _generalSize(16),
       paddingBottom: _generalSize(20),
     },
-  
-      headerArrow: {
-  
-      paddingLeft:_generalSize(10),
-      },
-  
-      headerText: {
-  
-        marginRight:_generalSize(10)
-      },
 
-      envelopeView: {
+      checkView: {
           flex:1,
           flexDirection:'column',
           justifyContent:'flex-end',
@@ -31,8 +21,15 @@ const getStyles = (theme) => {
 
       aligner: {
 
-        alignSelf:'center'
+        alignSelf:'center',
+        marginBottom: _generalSize(8)
       },
+
+
+      checkImage: {
+        alignSelf:'center',
+        marginVertical:_generalSize(24)
+      }
     
   });
 };

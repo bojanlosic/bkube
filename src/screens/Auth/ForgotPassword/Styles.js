@@ -10,7 +10,7 @@ const getStyles = (theme) => {
     container: {
       flex: 1,
       backgroundColor: getThemeColor("background", theme),
-      padding: _generalSize(16),
+      paddingHorizontal: _generalSize(24),
     },
 
     headerView: {
@@ -18,6 +18,11 @@ const getStyles = (theme) => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
+    },
+
+    instructionsViewWrapper: {
+      flex: 2,
+      justifyContent: "space-evenly",
     },
   });
 };
