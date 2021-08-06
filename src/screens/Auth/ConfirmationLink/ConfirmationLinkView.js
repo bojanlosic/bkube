@@ -22,7 +22,7 @@ export default ({ navigation, theme }) => {
             size={_generalSize(24)}
             color={getThemeColor("text", theme)}
             style={styles.headerArrow}
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.goBack()}
           />
 
           <AppText
