@@ -9,12 +9,17 @@ const ConfLink = ({ navigation }) => {
     email: "",
   });
 
+  const navigateBack = () => {
+    navigation.goBack();
+  };
+
 
 
   return (
     <ConfirmationLink
       navigation={navigation}
       theme={app.appTheme}
+      navigateBack={navigateBack}
       
     />
   );

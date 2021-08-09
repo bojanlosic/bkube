@@ -9,27 +9,21 @@ const getStyles = (theme) => {
     container: {
       flex: 1,
       backgroundColor: getThemeColor('background', theme),
-      paddingHorizontal:_generalSize(24)
+      paddingHorizontal:_generalSize(16)
     },
 
-    headerView: {
-
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent:'space-between'
-      },
-
       headerView: {
-        display: 'flex',
-        flexDirection:'row',
-        justifyContent:'space-between',
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
         alignItems: "center",
+        marginTop: _generalSize(32),
       },
 
 
       envelopeImage: {
         alignSelf:'center',
-        marginVertical:_generalSize(24),
+        marginVertical:_generalSize(16),
         
     },
 

@@ -11,22 +11,46 @@ import { _generalSize } from "../../../constants/sizeCalculator";
 import { AntDesign } from "@expo/vector-icons";
 import { defaultColors } from "../../../constants/colors/Colors";
 import ArrowLeft from "../../../../assets/svg/arrow-left.svg";
-export default ({ userInfo, sendForgotPasswordToEmail, navigateBack, navigation, theme, handleTextInput }) => {
+export default ({
+  userInfo,
+  sendForgotPasswordToEmail,
+  navigateBack,
+  navigation,
+  theme,
+  handleTextInput,
+}) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
     <View style={styles.container}>
       <View style={styles.headerView}>
         <TouchableOpacity onPress={navigateBack}>
-          <ArrowLeft width={_generalSize(28)} style={{ color: getThemeColor("text", theme) }} />
+          <ArrowLeft
+            width={_generalSize(28)}
+            style={{ color: getThemeColor("text", theme) }}
+          />
         </TouchableOpacity>
-        <AppText theme={theme} text="Forgot Password" fontSize={16} style={styles.headerText} />
+        <AppText
+          theme={theme}
+          text="Forgot Password"
+          fontSize={16}
+          style={styles.headerText}
+        />
         <ArrowLeft width={_generalSize(28)} />
       </View>
-      <View style={{ flex: 1, }}>
+      <View style={{ flex: 1 }}>
         <View style={styles.instructionsViewWrapper}>
           <View style={styles.instructionsView}>
-            <AppText theme={theme} text="Please fill in fields to continue" fontSize={20} />
-            <AppText theme={theme} text="Mail with furhter instructions will be sent to you" fontSize={16} color={"textInputPlaceholder"} />
+            <AppText
+              theme={theme}
+              text="Please fill in fields to continue"
+              fontSize={20}
+            />
+            <AppText
+              theme={theme}
+              text="Mail with furhter instructions will be sent to you"
+              fontSize={16}
+              color={"textInputPlaceholder"}
+            />
           </View>
           <View style={styles.inputView}>
             <FlatInput
@@ -42,7 +66,11 @@ export default ({ userInfo, sendForgotPasswordToEmail, navigateBack, navigation,
       </View>
       <View style={{ flex: 1 }}>
         <View style={styles.buttonView}>
-          <FlatButton theme={theme} text="Submit" onPress={() => navigation.navigate("ConfirmationLink")} />
+          <FlatButton
+            theme={theme}
+            text="Submit"
+            onPress={() => navigation.navigate("ConfirmationLink")}
+          />
         </View>
       </View>
     </View>

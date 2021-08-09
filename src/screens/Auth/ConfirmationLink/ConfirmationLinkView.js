@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
 import getStyles from "./Styles";
 import FlatInput from "../../../components/Inputs/FlatInput";
 import AppText from "../../../components/texts/AppText";
@@ -8,22 +8,21 @@ import OutlineButton from "../../../components/buttons/OutlineButton";
 import FlatButton from "../../../components/buttons/FlatButton";
 import getThemeColor from "../../../constants/colors/getThemeColor";
 import { _generalSize } from "../../../constants/sizeCalculator";
-import { AntDesign } from "@expo/vector-icons";
+import ArrowLeft from "../../../../assets/svg/arrow-left.svg";
 import { defaultColors } from "../../../constants/colors/Colors";
 import Envelope from "../../../../assets/svg/envelope.svg";
-export default ({ navigation, theme }) => {
+export default ({ navigation, theme, navigateBack }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
         <View style={styles.headerView}>
-          <AntDesign
-            name="arrowleft"
-            size={_generalSize(24)}
-            color={getThemeColor("text", theme)}
-            style={styles.headerArrow}
-            onPress={() => navigation.goBack()}
+        <TouchableOpacity onPress={navigateBack}>
+          <ArrowLeft
+            width={_generalSize(28)}
+            style={{ color: getThemeColor("text", theme) }}
           />
+        </TouchableOpacity>
 
           <AppText
             theme={theme}
@@ -32,10 +31,10 @@ export default ({ navigation, theme }) => {
             fontFamily={fonts.Heebo_400Regular}
             style={styles.headerText}
           />
-          <View />
+          <ArrowLeft width={_generalSize(28)} />
         </View>
         <View style={styles.envelopeView}>
-          <Envelope style={styles.envelopeImage}/>
+          <Envelope style={styles.envelopeImage} />
 
           <AppText
             theme={theme}
@@ -55,7 +54,12 @@ export default ({ navigation, theme }) => {
         </View>
       </View>
       <View style={{ flex: 1 }}></View>
-      <Text style={{color:'#FFF'}} onPress={() => navigation.navigate('EnterNewPassword')}>Next page</Text>
+      <Text
+        style={{ color: "#FFF" }}
+        onPress={() => navigation.navigate("EnterNewPassword")}
+      >
+        Next page
+      </Text>
     </View>
   );
 };

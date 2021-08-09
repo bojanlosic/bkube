@@ -29,14 +29,12 @@ import ContinueWithSocial from "../components/ContinueWithSocial";
 export default ({
   userInfo,
   handleTextInput,
-  login,
   navigation,
-  request,
-  promptAsync,
   errors,
   theme,
   hidePassword,
   handleHidePassword,
+  checkPasswords,
 }) => {
   const styles = React.useMemo(() => getStyles(theme), [theme]);
   return (
@@ -78,26 +76,27 @@ export default ({
           <FlatInput
             theme={theme}
             label="Repeat new password"
-            handleTextInput={(text) => handleTextInput(text, "passwordAgain")}
-            value={userInfo.passwordAgain}
-            error={errors.password}
-            secureTextEntry={hidePassword.password}
+            handleTextInput={(text) => handleTextInput(text, "repeatPassword")}
+            value={userInfo.repeatPassword}
+            error={errors.repeatPassword}
+            secureTextEntry={hidePassword.repeatPassword}
             iconName={() => (
               <Feather
-                name={hidePassword.password ? "eye" : "eye-off"}
+                name={hidePassword.repeatPassword ? "eye" : "eye-off"}
                 size={_generalSize(20)}
                 color={getThemeColor("textInputPlaceholder", theme)}
               />
             )}
-            iconClick={() => handleHidePassword("passwordAgain")}
+            iconClick={() => handleHidePassword("repeatPassword")}
           />
+          
         </View>
         <View />
       </View>
       <View style={{ flex: 1 }}>
         <FlatButton
           theme={theme}
-          onPress={() => navigation.navigate("SuccesfullyChange")}
+          onPress={() => checkPasswords()}
           text="Submit"
           style={styles.buttonSpace}
         />

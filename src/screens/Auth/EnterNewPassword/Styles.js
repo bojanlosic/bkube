@@ -13,22 +13,14 @@ const getStyles = (theme) => {
       flex: 1,
       backgroundColor: getThemeColor("background", theme),
       paddingHorizontal: _generalSize(16),
-      paddingBottom: _generalSize(20),
     },
     buttonSpace: {
-      marginBottom: _generalSize(10),
+      marginBottom: _generalSize(14),
     },
-
-    instructionsView : {
-
-      paddingHorizontal:_generalSize(8)
-    },
-
     inputAndInstructionsFlex: {
-
       flex: 1,
-      justifyContent:'space-around',
-    }
+      justifyContent: "space-around",
+    },
   });
 };
 
